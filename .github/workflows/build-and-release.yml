@@ -53,9 +53,10 @@ jobs:
       - name: Create Release
         env:
           GH_TOKEN: ${{ github.token }}
+          CLI_VERSION: ${{ github.event.client_payload.cli_version || inputs.cli_version }}
         run: |
           # Create release with GitHub CLI
-          gh release create "${{ inputs.cli_version }}" \
+          gh release create "$CLI_VERSION" \
             --title "Snyk DXT Release ${{ inputs.cli_version }}" \
             --notes "Snyk DXT built with CLI version ${{ inputs.cli_version }}" \
             ./dist/snyk.dxt \
