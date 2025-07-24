@@ -10,12 +10,6 @@ on:
 
   repository_dispatch:
     types: [ cli_release ]
-    inputs:
-      cli_version:
-        description: 'Snyk CLI version to use for the build and release (e.g., v1.0.0)'
-        required: true
-        type: string
-
 
 jobs:
   build-and-release:
@@ -36,6 +30,8 @@ jobs:
         run: chmod +x build-dxt.sh
       
       - name: Run build script
+        env:
+          CLI_VERSION: ${{ github.event.client_payload.cli_version || inputs.cli_version }}
         run: ./build-dxt.sh "${{ inputs.cli_version }}" "./dist"
       
       - name: Verify build artifacts
