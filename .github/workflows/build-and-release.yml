@@ -32,7 +32,7 @@ jobs:
       - name: Run build script
         env:
           CLI_VERSION: ${{ github.event.client_payload.cli_version || inputs.cli_version }}
-        run: ./build-dxt.sh "${{ inputs.cli_version }}" "./dist"
+        run: ./build-dxt.sh "$CLI_VERSION" "./dist"
       
       - name: Verify build artifacts
         run: |
