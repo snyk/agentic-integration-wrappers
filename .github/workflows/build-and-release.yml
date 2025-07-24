@@ -1,0 +1,58 @@
+name: Build and Release Snyk DXT
+
+on:
+  workflow_dispatch:
+    inputs:
+      cli_version:
+        description: 'Snyk CLI version to use for the build and release (e.g., v1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Make build script executable
+        run: chmod +x build-dxt.sh
+      
+      - name: Run build script
+        run: ./build-dxt.sh "${{ inputs.cli_version }}" "./dist"
+      
+      - name: Verify build artifacts
+        run: |
+          ls -la ./dist/
+          echo "snyk.dxt size: $(stat -c%s ./dist/snyk.dxt) bytes"
+          echo "SHA256 from file:"
+          cat ./dist/snyk.dxt.sha256
+          echo ""
+          echo "Verifying SHA256 checksum..."
+          cd ./dist
+          if sha256sum -c snyk.dxt.sha256; then
+            echo "✅ SHA256 verification passed"
+          else
+            echo "❌ SHA256 verification failed"
+            exit 1
+          fi
+      
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Create release with GitHub CLI
+          gh release create "${{ inputs.cli_version }}" \
+            --title "Snyk DXT Release ${{ inputs.cli_version }}" \
+            --notes "Snyk DXT built with CLI version ${{ inputs.cli_version }}" \
+            ./dist/snyk.dxt \
+            ./dist/snyk.dxt.sha256
+      

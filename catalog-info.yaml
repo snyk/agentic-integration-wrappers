@@ -1,0 +1,11 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: mcp-dxt
+  annotations:
+    github.com/project-slug: snyk/mcp-dxt
+    github.com/team-slug: snyk/ide
+spec:
+  type: external-tooling
+  lifecycle: "-"
+  owner: ide
