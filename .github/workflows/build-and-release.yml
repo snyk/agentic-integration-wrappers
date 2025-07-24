@@ -57,8 +57,8 @@ jobs:
         run: |
           # Create release with GitHub CLI
           gh release create "$CLI_VERSION" \
-            --title "Snyk DXT Release ${{ inputs.cli_version }}" \
-            --notes "Snyk DXT built with CLI version ${{ inputs.cli_version }}" \
+            --title "$CLI_VERSION" \
+            --notes "Snyk DXT built with CLI version $CLI_VERSION" \
             ./dist/snyk.dxt \
             ./dist/snyk.dxt.sha256
       
