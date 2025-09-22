@@ -69,7 +69,7 @@ jobs:
       - name: Login to MCP Registry
         run: |
           echo "${{ secrets.MCP_PRIVATE_KEY }}" > key.pem
-          ./mcp-publisher login dns --domain snyk.io --private-key-file key.pem
+          ./mcp-publisher login dns --domain snyk.io --private-key $(openssl pkey -in key.pem -noout -text | grep -A3 "priv:" | tail -n +2 | tr -d ' :\n')
 
       - name: Publish to MCP Registry
         env:
