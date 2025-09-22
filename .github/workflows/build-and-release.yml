@@ -72,4 +72,9 @@ jobs:
           ./mcp-publisher login dns --domain snyk.io --private-key-file key.pem
 
       - name: Publish to MCP Registry
-        run: ./mcp-publisher publish
+        env:
+          CLI_VERSION: ${{ github.event.client_payload.cli_version || inputs.cli_version }}
+        run: |
+          # Inject version into server.json before publishing
+          jq --arg v "$CLI_VERSION" '.version=$v | .packages[0].version=$v' server.json > server.json.tmp && mv server.json.tmp server.json
+          ./mcp-publisher publish
