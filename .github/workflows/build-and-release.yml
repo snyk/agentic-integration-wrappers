@@ -70,8 +70,6 @@ jobs:
         run: |
           echo "${{ secrets.MCP_PRIVATE_KEY }}" > key.pem
           ./mcp-publisher login dns --domain snyk.io --private-key-file key.pem
-        env:
-          GITHUB_TOKEN: ${{ secrets.TEAM_IDE_USER_TOKEN }}        
 
       - name: Publish to MCP Registry
         run: ./mcp-publisher publish
