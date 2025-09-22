@@ -14,7 +14,7 @@
       "registryType": "npm",
       "identifier": "snyk",
       "version": "1.1299.0",
-      "mcpName": "io.github.snyk/mcp",
+      "mcpName": "io.snyk/mcp",
       "transport": {
         "type": "stdio"
       },
