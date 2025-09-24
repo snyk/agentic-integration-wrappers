@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    if: ${{ !contains(github.event.client_payload.cli_version || inputs.cli_version, '-') }}
     
     steps:
       - name: Checkout repository
