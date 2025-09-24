@@ -1,0 +1,33 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-16/server.schema.json",
+  "name": "io.snyk/mcp",
+  "description": "Easily find and fix security issues in your applications leveraging Snyk platform capabilities.",
+  "status": "active",
+  "repository": {
+    "url": "https://github.com/snyk/snyk-ls",
+    "source": "github",
+    "subfolder": "mcp_extension"
+  },
+  "version": "1.1299.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "snyk",
+      "version": "1.1299.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        },
+        {
+          "type": "named",
+          "name": "-t",
+          "value": "stdio"
+        }
+      ]
+    }
+  ]
+}
