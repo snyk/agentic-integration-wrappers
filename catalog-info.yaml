@@ -1,9 +1,9 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: mcp-dxt
+  name: agentic-integration-wrappers
   annotations:
-    github.com/project-slug: snyk/mcp-dxt
+    github.com/project-slug: snyk/agentic-integration-wrappers
     github.com/team-slug: snyk/ide
 spec:
   type: external-tooling
