@@ -1,2 +1,1 @@
-# mcp-dxt
-Generates a DXT file for the Snyk MCP server
+Provides wrappers to integrate with agentic workflows.
