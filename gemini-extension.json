@@ -1,5 +1,5 @@
 {
-  "name": "snyk",
+  "name": "Snyk Gemini Extension",
   "version": "0.0.1",
   "mcpServers": {
     "snyk": {
