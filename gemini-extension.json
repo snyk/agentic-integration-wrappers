@@ -1,5 +1,5 @@
 {
-  "name": "Snyk Gemini Extension",
+  "name": "snyk",
   "version": "0.0.1",
   "mcpServers": {
     "snyk": {
@@ -13,6 +13,5 @@
       ]
     }
   },
-  "contextFileName": "GEMINI.md",
-  "excludeTools": ["run_shell_command"]
+  "contextFileName": "GEMINI.md"
 }
