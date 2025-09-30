@@ -68,10 +68,12 @@ jobs:
           curl -L "https://github.com/modelcontextprotocol/registry/releases/download/v1.0.0/mcp-publisher_1.0.0_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
 
       - name: Login to MCP Registry
+        env:
+          KEY_PEM: ${{ secrets.MCP_PRIVATE_KEY }}
         run: |
-          echo "${{ secrets.MCP_PRIVATE_KEY }}" > key.pem
+          printf '%s' "$KEY_PEM" > key.pem
           ./mcp-publisher login dns --domain snyk.io --private-key $(openssl pkey -in key.pem -noout -text | grep -A3 "priv:" | tail -n +2 | tr -d ' :\n')
-
+          rm key.pem
       - name: Publish to MCP Registry
         env:
           CLI_VERSION: ${{ github.event.client_payload.cli_version || inputs.cli_version }}
