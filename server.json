@@ -4,16 +4,15 @@
   "description": "Easily find and fix security issues in your applications leveraging Snyk platform capabilities.",
   "status": "active",
   "repository": {
-    "url": "https://github.com/snyk/snyk-ls",
-    "source": "github",
-    "subfolder": "mcp_extension"
+    "url": "https://github.com/snyk/studio-mcp",
+    "source": "github"
   },
-  "version": "1.1299.0",
+  "version": "1.1302.1",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "snyk",
-      "version": "1.1299.0",
+      "version": "1.1302.1",
       "transport": {
         "type": "stdio"
       },

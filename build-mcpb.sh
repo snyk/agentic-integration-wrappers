@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Build Claude Desktop Extension (dxt) from snyk-ls mcp_extension
-# Usage: ./build-dxt.sh <version> <output_dir>
+# Build MCP Bundle (mcpb) for Snyk Security
+# Usage: ./build-mcpb.sh <version> <output_dir>
 
 VERSION="${1}"
 OUTPUT_DIR="${2}"
@@ -13,7 +13,7 @@ CLI_DIR="${TEMP_DIR}/cli"
 # Cleanup on exit
 trap 'rm -rf "${TEMP_DIR}"' EXIT
 
-echo "Building snyk.dxt with version: ${VERSION}"
+echo "Building snyk.mcpb with version: ${VERSION}"
 echo "Output directory: ${OUTPUT_DIR}"
 
 # Ensure output directory exists
@@ -46,23 +46,23 @@ else
     sed -i "s/\"version\":[[:space:]]*\"[^\"]*\"/\"version\": \"${VERSION}\"/" "manifest.json"
 fi
 
-# Build the dxt file
-echo "Building dxt file..."
-npx @anthropic-ai/dxt pack . "${OUTPUT_DIR}/snyk.dxt"
+# Build the mcpb file
+echo "Building mcpb file..."
+npx @anthropic-ai/mcpb pack . "${OUTPUT_DIR}/snyk.mcpb"
 
 # Create SHA256 checksum
 pushd "${OUTPUT_DIR}"
   echo "Creating SHA256 checksum..."
   if [[ "$OSTYPE" == "darwin"* ]]; then
       # macOS
-      shasum -a 256 snyk.dxt > snyk.dxt.sha256
+      shasum -a 256 snyk.mcpb > snyk.mcpb.sha256
   else
       # Linux
-      sha256sum snyk.dxt > snyk.dxt.sha256
+      sha256sum snyk.mcpb > snyk.mcpb.sha256
   fi
 popd
 
-echo "Successfully built snyk.dxt"
+echo "Successfully built snyk.mcpb"
 echo "Output files:"
-echo "  - ${OUTPUT_DIR}/snyk.dxt"
-echo "  - ${OUTPUT_DIR}/snyk.dxt.sha256" 
+echo "  - ${OUTPUT_DIR}/snyk.mcpb"
+echo "  - ${OUTPUT_DIR}/snyk.mcpb.sha256"
