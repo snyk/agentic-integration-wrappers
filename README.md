@@ -8,10 +8,10 @@ The wrappers in this repository allow agentic AI systems (AI coding assistants) 
 
 ## Supported Integrations
 
-### Claude Desktop Extension (DXT)
+### Claude Desktop Extension (MCPB)
 - **File**: `manifest.json`
-- **Purpose**: Packages Snyk as a Claude Desktop Extension
-- **Build Script**: `build-dxt.sh` - Creates a `.dxt` file for distribution
+- **Purpose**: Packages Snyk as a Claude Desktop Extension (MCP Bundle)
+- **Build Script**: `build-mcpb.sh` - Creates a `.mcpb` file for distribution
 - **Capabilities**: Full Snyk security scanning suite via MCP
 
 ### Google Gemini Extension
@@ -44,7 +44,7 @@ All integrations use the Snyk CLI's MCP server capability (`snyk mcp -t stdio`),
 The repository uses an automated GitHub Actions workflow (`build-and-release.yml`) that:
 
 1. Triggers on Snyk CLI releases (via `repository_dispatch` or manual `workflow_dispatch`)
-2. Builds the Claude Desktop Extension (`.dxt` file) using `build-dxt.sh`
+2. Builds the Claude Desktop Extension (`.mcpb` file) using `build-mcpb.sh`
 3. Creates a GitHub release with the built artifacts and SHA256 checksums
 4. Publishes the updated MCP server configuration to the Anthropic MCP Registry
 

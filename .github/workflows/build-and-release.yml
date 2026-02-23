@@ -1,4 +1,4 @@
-name: Build and Release Snyk DXT
+name: Build and Release Snyk MCPB
 
 on:
   workflow_dispatch:
@@ -28,23 +28,23 @@ jobs:
           node-version: '18'
       
       - name: Make build script executable
-        run: chmod +x build-dxt.sh
+        run: chmod +x build-mcpb.sh
       
       - name: Run build script
         env:
           CLI_VERSION: ${{ github.event.client_payload.cli_version || inputs.cli_version }}
-        run: ./build-dxt.sh "$CLI_VERSION" "./dist"
+        run: ./build-mcpb.sh "$CLI_VERSION" "./dist"
       
       - name: Verify build artifacts
         run: |
           ls -la ./dist/
-          echo "snyk.dxt size: $(stat -c%s ./dist/snyk.dxt) bytes"
+          echo "snyk.mcpb size: $(stat -c%s ./dist/snyk.mcpb) bytes"
           echo "SHA256 from file:"
-          cat ./dist/snyk.dxt.sha256
+          cat ./dist/snyk.mcpb.sha256
           echo ""
           echo "Verifying SHA256 checksum..."
           cd ./dist
-          if sha256sum -c snyk.dxt.sha256; then
+          if sha256sum -c snyk.mcpb.sha256; then
             echo "✅ SHA256 verification passed"
           else
             echo "❌ SHA256 verification failed"
@@ -59,9 +59,9 @@ jobs:
           # Create release with GitHub CLI
           gh release create "$CLI_VERSION" \
             --title "$CLI_VERSION" \
-            --notes "Snyk DXT built with CLI version $CLI_VERSION" \
-            ./dist/snyk.dxt \
-            ./dist/snyk.dxt.sha256
+            --notes "Snyk MCPB built with CLI version $CLI_VERSION" \
+            ./dist/snyk.mcpb \
+            ./dist/snyk.mcpb.sha256
       
       - name: Install MCP Publisher
         run: |

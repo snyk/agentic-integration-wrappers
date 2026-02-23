@@ -1,10 +1,12 @@
 {
-  "dxt_version": "0.1",
+  "manifest_version": "0.3",
   "name": "Snyk Security",
-  "version": "1.1298.3",
+  "version": "1.1302.1",
   "description": "Easily find and fix security issues in your applications leveraging Snyk platform capabilities.",
+  "long_description": "Snyk MCP enables AI assistants to perform comprehensive security scanning on code, dependencies, infrastructure, and containers. Integrate Snyk's security capabilities directly into your AI-assisted development workflow to proactively identify and fix vulnerabilities during code generation and review.\n\nSupported scanning types:\n- **SAST (Static Application Security Testing)**: Analyze source code for security vulnerabilities\n- **SCA (Software Composition Analysis)**: Detect vulnerabilities in open source dependencies\n- **IaC (Infrastructure as Code)**: Find security misconfigurations in cloud infrastructure\n- **Container Security**: Scan container images for vulnerabilities\n- **SBOM/AIBOM**: Generate and test Software/AI Bills of Materials",
   "author": {
-    "name": "Snyk"
+    "name": "Snyk",
+    "url": "https://snyk.io"
   },
   "homepage": "https://snyk.io",
   "documentation": "https://docs.snyk.io",
@@ -26,17 +28,41 @@
     }
   },
   "tools_generated": true,
+  "prompts": [
+    {
+      "name": "security_code_review",
+      "description": "Perform a security-focused code review",
+      "arguments": ["path"],
+      "text": "Use the snyk_code_scan tool to scan ${arguments.path} for security vulnerabilities. Identify any issues found and suggest fixes."
+    },
+    {
+      "name": "scan_dependencies",
+      "description": "Scan project dependencies for security vulnerabilities",
+      "arguments": ["path"],
+      "text": "Use the snyk_sca_scan tool to scan ${arguments.path} for dependency vulnerabilities. Report any critical or high severity issues found."
+    },
+    {
+      "name": "fix_vulnerabilities",
+      "description": "Scan and fix security vulnerabilities in the project",
+      "arguments": ["path"],
+      "text": "Use the snyk_code_scan and snyk_sca_scan tools to scan ${arguments.path} for security vulnerabilities, then automatically fix any issues that have available remediation."
+    }
+  ],
   "keywords": [
     "security",
     "sast",
     "sca",
     "iac",
     "container",
+    "vulnerability",
+    "scanning",
+    "devsecops",
     "ai"
   ],
   "license": "Apache-2.0",
+  "privacy_policies": ["https://snyk.io/policies/privacy/"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/snyk/snyk-ls/tree/main/mcp_extension"
+    "url": "https://github.com/snyk/studio-mcp"
   }
 }
