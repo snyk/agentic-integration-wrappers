@@ -46,6 +46,21 @@ else
     sed -i "s/\"version\":[[:space:]]*\"[^\"]*\"/\"version\": \"${VERSION}\"/" "manifest.json"
 fi
 
+# Install Snyk CLI as a bundled dependency so the binary is packaged inside the .mcpb
+echo "Installing snyk@${VERSION} as bundled dependency..."
+rm -rf node_modules package.json package-lock.json
+cat > package.json <<PKGJSON
+{
+  "name": "snyk-mcpb",
+  "version": "${VERSION}",
+  "private": true,
+  "dependencies": {
+    "snyk": "${VERSION}"
+  }
+}
+PKGJSON
+npm install --production
+
 # Build the mcpb file
 echo "Building mcpb file..."
 npx @anthropic-ai/mcpb pack . "${OUTPUT_DIR}/snyk.mcpb"
