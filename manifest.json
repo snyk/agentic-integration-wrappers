@@ -14,19 +14,74 @@
   "icon": "icon.png",
   "server": {
     "type": "node",
-    "entry_point": "npx snyk",
+    "entry_point": "node_modules/snyk/bin/snyk",
     "mcp_config": {
-      "command": "npx",
+      "command": "${__dirname}/node_modules/snyk/bin/snyk",
       "args": [
-        "-y",
-        "snyk@latest",
         "mcp",
         "-t",
         "stdio"
       ],
-      "env": {}
+      "env": {
+        "SNYK_TOKEN": "${user_config.snyk_token}"
+      }
     }
   },
+  "user_config": {
+    "snyk_token": {
+      "type": "string",
+      "title": "Snyk API Token",
+      "description": "Optional. Authenticate interactively using the snyk_auth tool (recommended), or paste your Snyk API token from https://app.snyk.io/account as a fallback.",
+      "sensitive": true,
+      "required": false
+    }
+  },
+  "tools": [
+    {
+      "name": "snyk_version",
+      "description": "Displays the installed Snyk CLI version."
+    },
+    {
+      "name": "snyk_auth",
+      "description": "Authenticates the user with Snyk by storing an API token locally."
+    },
+    {
+      "name": "snyk_logout",
+      "description": "Logs out of the current Snyk account by clearing the locally stored authentication token."
+    },
+    {
+      "name": "snyk_trust",
+      "description": "Trusts a given folder to allow Snyk to scan it."
+    },
+    {
+      "name": "snyk_code_scan",
+      "description": "Performs Static Application Security Testing (SAST) by analyzing source code to identify security vulnerabilities without executing the code."
+    },
+    {
+      "name": "snyk_sca_scan",
+      "description": "Analyzes projects for open-source vulnerabilities and license compliance issues by inspecting manifest files to understand dependencies and querying the Snyk vulnerability database."
+    },
+    {
+      "name": "snyk_iac_scan",
+      "description": "Analyzes Infrastructure as Code (IaC) files for security misconfigurations across Terraform, Kubernetes, CloudFormation, and ARM templates."
+    },
+    {
+      "name": "snyk_container_scan",
+      "description": "Scans container images for known vulnerabilities in OS packages and application dependencies."
+    },
+    {
+      "name": "snyk_sbom_scan",
+      "description": "Analyzes an existing SBOM file for known vulnerabilities in its open-source components."
+    },
+    {
+      "name": "snyk_aibom",
+      "description": "Generates an AI Bill of Materials (AIBOM) for Python software projects in CycloneDX format, identifying AI models, datasets, and tools."
+    },
+    {
+      "name": "snyk_send_feedback",
+      "description": "Reports the delta of Snyk issues prevented or fixed during a session for tracking security improvements."
+    }
+  ],
   "tools_generated": true,
   "prompts": [
     {
