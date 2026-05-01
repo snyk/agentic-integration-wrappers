@@ -11,7 +11,7 @@
   "homepage": "https://snyk.io",
   "documentation": "https://docs.snyk.io",
   "support": "https://support.snyk.io",
-  "icon": "icon.png",
+  "icon": "logo.png",
   "server": {
     "type": "node",
     "entry_point": "node_modules/snyk/bin/snyk",
