@@ -7,6 +7,10 @@ on:
         description: 'Snyk CLI version to use for the build and release (e.g., v1.0.0)'
         required: true
         type: string
+      skip_release:
+        description: 'Skip creating a GitHub Release'
+        required: false
+        type: boolean
 
   repository_dispatch:
     types: [ cli_release ]
@@ -52,6 +56,7 @@ jobs:
           fi
       
       - name: Create Release
+        if: ${{ inputs.skip_release != true }}
         env:
           GH_TOKEN: ${{ github.token }}
           CLI_VERSION: ${{ github.event.client_payload.cli_version || inputs.cli_version }}
@@ -65,7 +70,7 @@ jobs:
       
       - name: Install MCP Publisher
         run: |
-          curl -L "https://github.com/modelcontextprotocol/registry/releases/download/v1.0.0/mcp-publisher_1.0.0_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/download/v1.7.8/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
 
       - name: Login to MCP Registry
         env:
