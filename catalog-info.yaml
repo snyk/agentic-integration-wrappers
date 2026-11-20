@@ -4,8 +4,8 @@ metadata:
   name: agentic-integration-wrappers
   annotations:
     github.com/project-slug: snyk/agentic-integration-wrappers
-    github.com/team-slug: snyk/agentic_dev
+    github.com/team-slug: snyk/agentic-appsec_agentic-code-security
 spec:
   type: external-tooling
   lifecycle: "-"
-  owner: agentic_dev
+  owner: agentic-appsec_agentic-code-security
